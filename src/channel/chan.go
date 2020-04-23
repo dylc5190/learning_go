@@ -33,7 +33,7 @@ func main() {
     n := make(chan int)
     var wg sync.WaitGroup
     rand.Seed(time.Now().UnixNano())
-    go sender(&wg,s,n)                  // Important: use pointer of wg.
+    go sender(&wg,s,n)                  // Important: use pointer of wg. Alternatively, wg can be decalred in sender() in which you create another goroutine to wait for wg and close channel n.
     go receiver(n,r)
     for i:=0;i<10;i++ {
         size := 1 + rand.Intn(20)
